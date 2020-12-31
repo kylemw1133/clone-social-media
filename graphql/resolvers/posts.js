@@ -11,7 +11,6 @@ module.exports = {
       }
     },
     async getPost(_, { postId }) {
-      console.log("testing");
       try {
         const post = await Post.findById(postId);
         if (post) {
@@ -27,7 +26,6 @@ module.exports = {
   Mutatiion: {
     async createPost(_, { body }, context) {
       const user = checkAuth(context);
-      console.log("testing");
       const newPost = new Post({
         body,
         user: user.id,
@@ -37,6 +35,27 @@ module.exports = {
 
       const post = await newPost.save();
       return post;
+    },
+    async deletePost(_, { postId }, context) {
+      try {
+        const mypost = await Post.findById(postId);
+        if (mypost) {
+          const user = checkAuth(context);
+          if (user.username === mypost.username) {
+            Post.findByIdAndDelete(postId, function (err) {
+              if (err) console.log(err);
+              console.log("Successful deletion");
+            });
+          } else {
+            throw new Error("Not valid user");
+          }
+        } else {
+          throw new Error("Not the correct id for post");
+        }
+        return "Post deleted successfully";
+      } catch (err) {
+        throw new Error(err);
+      }
     },
   },
 };
