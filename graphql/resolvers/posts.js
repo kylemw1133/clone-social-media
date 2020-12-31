@@ -57,5 +57,16 @@ module.exports = {
         throw new Error(err);
       }
     },
+    async createComment(_, { body, postId }, context) {
+      const thePost = await Post.findById(postId);
+      const user = checkAuth(context);
+      await thePost.comments.push({
+        body: body,
+        createdAt: new Date().toISOString(),
+        username: user.username,
+      });
+      await thePost.save();
+      return thePost.comments[thePost.comments.length - 1];
+    },
   },
 };
