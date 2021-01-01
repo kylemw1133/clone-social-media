@@ -84,7 +84,7 @@ module.exports = {
         ) {
           thePost.comments.pull({ _id: commentId });
           await thePost.save();
-          return "pulled";
+          return "comment deleted";
         } else {
           throw new Error("not a valid operation");
         }
@@ -107,6 +107,24 @@ module.exports = {
         return "Successfully liked the post";
       } else {
         throw new Error("User already liked the post");
+      }
+    },
+    async deleteLike(_, { postId, likeId }, context) {
+      try {
+        const thePost = await Post.findById(postId);
+        const user = checkAuth(context);
+        const found = thePost.likes.find(
+          (element) => element.username === user.username
+        );
+        if (found) {
+          thePost.likes.pull({ _id: likeId });
+          await thePost.save();
+          return "like deleted";
+        } else {
+          throw new Error("Like not found");
+        }
+      } catch (err) {
+        throw new Error(err);
       }
     },
   },
