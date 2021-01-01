@@ -68,5 +68,41 @@ module.exports = {
       await thePost.save();
       return thePost.comments[thePost.comments.length - 1];
     },
+    async deleteComment(_, { postId, commentId }, context) {
+      const thePost = await Post.findById(postId);
+      const user = checkAuth(context);
+      thePost.comments.pull({ _id: commentId });
+      await thePost.save();
+      return "pulled";
+      // console.log(found);
+      // if (typeof found !== "undefined") {
+      //   if (user.username === found.username) {
+      //     console.log("Reached where comment should be pulled");
+      //     Post.comments.pull({ _id: commentId });
+      //     return "should have removed";
+      //   } else {
+      //     throw new Error("No permission to delete");
+      //   }
+      // } else {
+      //   throw new Error("Comment does not exist");
+      // }
+    },
+    async createLike(_, { postId }, context) {
+      const thePost = await Post.findById(postId);
+      const user = checkAuth(context);
+      const found = thePost.likes.find(
+        (element) => element.username === user.username
+      );
+      if (typeof found === "undefined") {
+        await thePost.likes.push({
+          username: user.username,
+          createdAt: new Date().toISOString(),
+        });
+        await thePost.save();
+        return "Successfully liked the post";
+      } else {
+        throw new Error("User already liked the post");
+      }
+    },
   },
 };
