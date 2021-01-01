@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server");
-//Schema
+
 module.exports = gql`
   type Query {
     getPosts: [Post]

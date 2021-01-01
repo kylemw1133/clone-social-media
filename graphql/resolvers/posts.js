@@ -58,34 +58,39 @@ module.exports = {
       }
     },
     async createComment(_, { body, postId }, context) {
-      const thePost = await Post.findById(postId);
-      const user = checkAuth(context);
-      await thePost.comments.push({
-        body: body,
-        createdAt: new Date().toISOString(),
-        username: user.username,
-      });
-      await thePost.save();
-      return thePost.comments[thePost.comments.length - 1];
+      try {
+        const thePost = await Post.findById(postId);
+        const user = checkAuth(context);
+        await thePost.comments.push({
+          body: body,
+          createdAt: new Date().toISOString(),
+          username: user.username,
+        });
+        await thePost.save();
+        return thePost.comments[thePost.comments.length - 1];
+      } catch (err) {
+        throw new Error(err);
+      }
     },
     async deleteComment(_, { postId, commentId }, context) {
-      const thePost = await Post.findById(postId);
-      const user = checkAuth(context);
-      thePost.comments.pull({ _id: commentId });
-      await thePost.save();
-      return "pulled";
-      // console.log(found);
-      // if (typeof found !== "undefined") {
-      //   if (user.username === found.username) {
-      //     console.log("Reached where comment should be pulled");
-      //     Post.comments.pull({ _id: commentId });
-      //     return "should have removed";
-      //   } else {
-      //     throw new Error("No permission to delete");
-      //   }
-      // } else {
-      //   throw new Error("Comment does not exist");
-      // }
+      try {
+        const thePost = await Post.findById(postId);
+        const user = checkAuth(context);
+        if (
+          thePost.comments.some(
+            (comment) =>
+              comment.username === user.username && comment._id == commentId
+          )
+        ) {
+          thePost.comments.pull({ _id: commentId });
+          await thePost.save();
+          return "pulled";
+        } else {
+          throw new Error("not a valid operation");
+        }
+      } catch (err) {
+        throw new Error(err);
+      }
     },
     async createLike(_, { postId }, context) {
       const thePost = await Post.findById(postId);
