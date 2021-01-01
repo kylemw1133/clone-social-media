@@ -40,7 +40,6 @@ module.exports = {
         }
       }
       const token = generateToken(user);
-      console.log(user._doc);
       return {
         ...user._doc,
         id: user._id,
