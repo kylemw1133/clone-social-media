@@ -10,6 +10,11 @@ const POSTS_QUERY = gql`
       body
       createdAt
       username
+      comments {
+        body
+        username
+        createdAt
+      }
     }
   }
 `;
@@ -21,12 +26,15 @@ const PostList = () => {
   return (
     <div>
       {data.getPosts.map((post) => (
-        <Post
-          key={post.id}
-          body={post.body}
-          username={post.username}
-          createdAt={post.createdAt}
-        />
+        <div>
+          <Post
+            key={post.id}
+            body={post.body}
+            username={post.username}
+            createdAt={post.createdAt}
+            comments={post.comments}
+          />
+        </div>
       ))}
     </div>
   );
