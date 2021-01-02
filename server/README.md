@@ -1,4 +1,13 @@
-# Social Media Clone
+# Server - Social Media Clone
+
+## Backend of social media clone
+
+## Dependencies:
+
+- MongoDB
+- Mongoose
+- GraphQL
+- Apollo Server
 
 ### TODO
 
