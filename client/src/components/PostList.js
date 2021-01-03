@@ -2,7 +2,7 @@ import React from "react";
 import Post from "./Post";
 import { useQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-
+import "./postList.css";
 const POSTS_QUERY = gql`
   {
     getPosts {
@@ -24,7 +24,7 @@ const PostList = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error </p>;
   return (
-    <div>
+    <div className="PostList">
       {data.getPosts.map((post) => (
         <div>
           <Post

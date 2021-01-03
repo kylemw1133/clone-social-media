@@ -5,8 +5,17 @@
 ## Dependencies:
 
 - React.js
+- Apollo Client
 
 ### TODO
 
 - Create UI design
-- Connect React to backend (Apollo client?)
+
+#### Sign in/out
+
+- Create login feature (figure out how to update Apollo Client with logged in Bearer token)
+- Create logout feature (update Apollo Client to reset token)
+
+#### Create a post
+
+- Update the displayed posts after submitting (without refreshing page) ~store posts in state and update state?

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import CommentList from "./CommentList";
-
+import "./post.css";
 const Post = (props) => {
   return (
-    <div>
+    <div className="Post">
       <h3>{props.username}</h3>
       <p>{props.body}</p>
       <p>{props.createdAt}</p>
