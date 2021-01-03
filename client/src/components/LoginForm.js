@@ -2,7 +2,7 @@ import React from "react";
 import { gql, useMutation } from "@apollo/client";
 
 const LOGIN = gql`
-  mutation LoginForm($username: String!, $password: String!) {
+  mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password) {
       id
       username
@@ -12,7 +12,16 @@ const LOGIN = gql`
 const LoginForm = () => {
   let inputUsername;
   let inputPassword;
-  const [login, { data }] = useMutation(LOGIN);
+  const { loading, error, login } = useMutation(LOGIN, {
+    variables: {
+      username: inputUsername,
+      password: inputPassword,
+    },
+    onCompleted: ({ login }) => {
+      console.log(login.token);
+      localStorage.setItem("Authorization", login.token);
+    },
+  });
   const handleSubmit = (e) => {
     e.preventDefault();
     login(inputUsername, inputPassword);
