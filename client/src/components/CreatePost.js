@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-
+import "./createPost.css";
 const CREATE_POST = gql`
   mutation CreatePost($body: String!) {
     createPost(body: $body) {
@@ -15,7 +15,7 @@ const CreatePost = (props) => {
   const [body, setBody] = useState("");
 
   return (
-    <div>
+    <div className="createPost">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -23,7 +23,7 @@ const CreatePost = (props) => {
           input.value = "";
         }}
       >
-        <input
+        <textarea
           ref={(node) => {
             input = node;
           }}

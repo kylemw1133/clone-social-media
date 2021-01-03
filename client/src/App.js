@@ -5,6 +5,7 @@ import { setContext } from "@apollo/client/link/context";
 import PostList from "./components/PostList";
 import CreatePost from "./components/CreatePost";
 import LoginForm from "./components/LoginForm";
+import NavBar from "./components/NavBar";
 const httpLink = createHttpLink({
   uri: "http://localhost:5000/",
 });
@@ -31,9 +32,9 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <PostList />
+      <NavBar />
       <CreatePost />
-      <LoginForm />
+      <PostList />
     </ApolloProvider>
   );
 }

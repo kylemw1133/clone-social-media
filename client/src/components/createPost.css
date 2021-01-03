@@ -1,0 +1,11 @@
+.createPost {
+  margin-left: 20%;
+  width: 60%;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+.createPost textarea {
+  height: 90px;
+  width: 100%;
+  resize: none;
+}
