@@ -5,12 +5,13 @@ const CommentList = (props) => {
     <div>
       <h5>Comments</h5>
       {props.comments.map((comment) => (
-        <Comment
-          key={comment.id}
-          createdAt={comment.createdAt}
-          username={comment.username}
-          body={comment.body}
-        />
+        <div key={comment.id}>
+          <Comment
+            createdAt={comment.createdAt}
+            username={comment.username}
+            body={comment.body}
+          />
+        </div>
       ))}
     </div>
   );

@@ -1,34 +1,24 @@
 import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-const LOGIN_MUTATION = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password) {
-      id
-      username
-      token
-    }
-  }
-`;
-const LoginForm = () => {
+
+const LoginForm = (props) => {
   const [formState, setFormState] = useState({
     username: "",
     password: "",
   });
-  const [login, { data }] = useMutation(LOGIN_MUTATION);
 
   return (
     <div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          login({
+          props.login({
             variables: {
               username: formState.username,
               password: formState.password,
             },
           });
           setFormState({ username: "", password: "" });
-          console.log(data);
         }}
       >
         <input
@@ -38,6 +28,7 @@ const LoginForm = () => {
           placeholder="username"
         ></input>
         <input
+          type="password"
           onChange={(e) => {
             setFormState({ ...formState, password: e.target.value });
           }}

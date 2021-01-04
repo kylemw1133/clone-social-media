@@ -26,9 +26,10 @@ const PostList = () => {
   return (
     <div className="PostList">
       {data.getPosts.map((post) => (
-        <div>
+        <div key={post.id}>
           <Post
             key={post.id}
+            id={post.id}
             body={post.body}
             username={post.username}
             createdAt={post.createdAt}

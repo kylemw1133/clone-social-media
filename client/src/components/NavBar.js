@@ -1,6 +1,5 @@
 import React from "react";
-import LoginForm from "./LoginForm";
-
+import Login from "./Login";
 import "./navbar.css";
 const NavBar = () => {
   return (
@@ -10,7 +9,7 @@ const NavBar = () => {
           <a href="#">Home</a>
         </li>
         <li id="loginForm">
-          <LoginForm />
+          <Login />
         </li>
       </ul>
     </div>
