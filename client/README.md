@@ -1,21 +1,32 @@
-# Server - Social Media Clone
-
-## Frontend of social media clone
+# Client - Social Media Clone (Frontend)
 
 ## Dependencies:
 
 - React.js
 - Apollo Client
+- React Router
+- Semantic UI?
 
-### TODO
+## TODO
 
-- Create UI design
+#### Pages
+
+- Implement React Router w/ User, Signup, and Home pages
+
+#### Styling
+
+- Add css/HTML framework for quick styling purposes
 
 #### Sign in/out
 
-- Create login feature (figure out how to update Apollo Client with logged in Bearer token)
+- Display login form after failed login attempt
 - Create logout feature (update Apollo Client to reset token)
 
-#### Create a post
+#### Posts
 
 - Update the displayed posts after submitting (without refreshing page) ~store posts in state and update state?
+- Delete post
+
+#### Sign Up
+
+- Create Signup page with signup form

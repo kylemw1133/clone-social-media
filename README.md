@@ -1,2 +1,3 @@
-### Social Media Clone based broadly on various social media platforms
-## Completed for educational purposes.
+# Social Media Clone based on various social media platforms
+
+### Project created for educational purposes using MERNG stack

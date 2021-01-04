@@ -1,6 +1,4 @@
-# Server - Social Media Clone
-
-## Backend of social media clone
+# Server - Social Media Clone (Backend)
 
 ## Dependencies:
 
@@ -11,5 +9,6 @@
 
 ### TODO
 
+- Error handling for almost all resolvers
 - fix delete comment resolver adding further checking for errors
 - check delete like resolver for efficiency
