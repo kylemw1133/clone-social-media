@@ -1,12 +1,17 @@
 import React from "react";
 import Login from "./Login";
+
+import { Link } from "react-router-dom";
 import "./navbar.css";
 const NavBar = () => {
   return (
     <div className="Navbar">
       <ul>
         <li>
-          <a href="#">Home</a>
+          <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/register">Register</Link>
         </li>
         <li id="loginForm">
           <Login />

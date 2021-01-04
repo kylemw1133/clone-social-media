@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import PostList from "./components/PostList";
-import CreatePost from "./components/CreatePost";
 import LoginForm from "./components/LoginForm";
 import NavBar from "./components/NavBar";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import Home from "./pages/Home";
+import Register from "./pages/Register";
+import UserProfile from "./pages/UserProfile";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:5000/",
@@ -31,9 +33,12 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <NavBar />
-      <CreatePost />
-      <PostList />
+      <Router>
+        <NavBar />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/userprofile" component={UserProfile} />
+      </Router>
     </ApolloProvider>
   );
 }

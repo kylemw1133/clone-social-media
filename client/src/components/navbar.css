@@ -6,6 +6,7 @@
 .Navbar li {
   float: left;
   list-style-type: none;
+  padding-right: 50px;
 }
 a {
   text-decoration: none;
