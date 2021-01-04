@@ -14,6 +14,7 @@ const POSTS_QUERY = gql`
         body
         username
         createdAt
+        id
       }
     }
   }

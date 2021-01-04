@@ -3,7 +3,6 @@ import Comment from "./Comment";
 const CommentList = (props) => {
   return (
     <div>
-      <h5>Comments</h5>
       {props.comments.map((comment) => (
         <div key={comment.id}>
           <Comment
