@@ -12,20 +12,19 @@ const CREATE_POST = gql`
 const CreatePost = (props) => {
   let input;
   const [createPost, { data }] = useMutation(CREATE_POST);
-  const [body, setBody] = useState("");
+  const [postBody, setPostBody] = useState("");
 
   return (
     <div className="createPost">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          createPost({ variables: { body: input.value } });
-          input.value = "";
+        onSubmit={async (e) => {
+          createPost({ variables: { body: postBody } });
+          setPostBody("");
         }}
       >
         <textarea
-          ref={(node) => {
-            input = node;
+          onChange={(e) => {
+            setPostBody(e.target.value);
           }}
         />
         <button type="submit">CreatePost</button>
