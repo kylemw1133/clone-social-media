@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
+import gql from "graphql-tag";
 import "./createPost.css";
 const CREATE_POST = gql`
   mutation CreatePost($body: String!) {
@@ -10,7 +11,6 @@ const CREATE_POST = gql`
   }
 `;
 const CreatePost = (props) => {
-  let input;
   const [createPost, { data }] = useMutation(CREATE_POST);
   const [postBody, setPostBody] = useState("");
 

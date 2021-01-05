@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { gql, useMutation } from "@apollo/client";
-import RegisterForm from "./RegisterForm";
-const REGISTER_MUTATION = gql`
+import { useHistory } from "react-router-dom";
+const REGISTER_USER = gql`
   mutation register(
     $username: String!
     $email: String!
@@ -17,33 +17,74 @@ const REGISTER_MUTATION = gql`
       }
     ) {
       id
+      email
       username
+      createdAt
       token
     }
   }
 `;
 
-const Register = () => {
-  const [register, { loading, error }] = useMutation("REGISTER_MUTATION", {
-    onCompleted({ register }) {
-      if (register) {
-        localStorage.setItem("token", register.token);
-        localStorage.setItem("user", register.username);
-      }
-    },
-    onError(error) {
-      console.log(error.message);
-    },
+const Register = (props) => {
+  const history = useHistory();
+  const routeChange = () => {
+    let path = `/`;
+    history.push(path);
+  };
+
+  const [formInput, setFormInput] = useState({
+    username: "",
+    password: "",
+    confirmPassword: "",
+    email: "",
   });
-  if (loading) {
-    console.log("loading");
-    return <div>loading...</div>;
-  }
-  if (error) return <div>{error.message}</div>;
+  const [register] = useMutation(REGISTER_USER, {
+    update(_, { data: { register: userData } }) {
+      setFormInput({
+        username: "",
+        password: "",
+        confirmPassword: "",
+        email: "",
+      });
+      routeChange();
+    },
+    onError(err) {
+      console.log(err);
+    },
+    variables: formInput,
+  });
   return (
-    <div>
-      <RegisterForm register={register} />
-    </div>
+    <form
+      onSubmit={(e) => {
+        register({ variables: formInput });
+      }}
+    >
+      <input
+        onChange={(e) => {
+          setFormInput({ ...formInput, username: e.target.value });
+        }}
+        placeholder="username"
+      ></input>
+      <input
+        onChange={(e) => {
+          setFormInput({ ...formInput, password: e.target.value });
+        }}
+        placeholder="password"
+      ></input>
+      <input
+        onChange={(e) => {
+          setFormInput({ ...formInput, confirmPassword: e.target.value });
+        }}
+        placeholder="Repeat password"
+      ></input>
+      <input
+        onChange={(e) => {
+          setFormInput({ ...formInput, email: e.target.value });
+        }}
+        placeholder="email"
+      ></input>
+      <button type="submit">Sign up</button>
+    </form>
   );
 };
 export default Register;
