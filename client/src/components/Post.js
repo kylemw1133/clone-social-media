@@ -10,10 +10,12 @@ const Post = (props) => {
     <div className="Post">
       <h3>{props.username}</h3>
       <p>{props.body}</p>
-      <p>{moment(props.createdAt).fromNow()}</p>
       <Link to={`/posts/${props.id}`}>
-        <button>Comments</button>
+        <p>{moment(props.createdAt).fromNow()}</p>
       </Link>
+
+      <button>Comments</button>
+
       <Link>
         <button>Likes</button>
       </Link>

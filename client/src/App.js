@@ -7,7 +7,7 @@ import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Register from "./pages/Register";
-import UserProfile from "./pages/UserProfile";
+import PostPage from "./pages/PostPage";
 
 const httpLink = createHttpLink({
   uri: "http://localhost:5000/",
@@ -37,7 +37,7 @@ function App() {
         <NavBar />
         <Route exact path="/" component={Home} />
         <Route exact path="/register" component={Register} />
-        <Route exact path="/userprofile" component={UserProfile} />
+        <Route path="/posts/:postId" component={PostPage} />
       </Router>
     </ApolloProvider>
   );
