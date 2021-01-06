@@ -11,6 +11,7 @@ const LOGIN_MUTATION = gql`
     }
   }
 `;
+
 const Login = () => {
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
     onCompleted({ login }) {

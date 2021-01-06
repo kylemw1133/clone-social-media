@@ -36,6 +36,13 @@ const PostPage = () => {
       <p>{data.getPost.createdAt}</p>
       <p>{data.getPost.body}</p>
       <CommentList comments={data.getPost.comments} />
+      <h3>Likes</h3>
+      {data.getPost.likes.map((like) => (
+        <div>
+          <p>{like.username}</p>
+          <p>{like.createdAt}</p>
+        </div>
+      ))}
     </div>
   );
 };

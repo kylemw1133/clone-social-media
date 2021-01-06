@@ -4,6 +4,7 @@ import Login from "./Login";
 import { Link } from "react-router-dom";
 import "./navbar.css";
 const NavBar = () => {
+  const username = localStorage.getItem("user");
   return (
     <div className="Navbar">
       <ul>
@@ -16,6 +17,7 @@ const NavBar = () => {
         <li id="loginForm">
           <Login />
         </li>
+        <li>{username}</li>
       </ul>
     </div>
   );
