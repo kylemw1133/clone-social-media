@@ -6,3 +6,7 @@
   padding-left: 5px;
   border: solid;
 }
+
+#error {
+  text-align: center;
+}

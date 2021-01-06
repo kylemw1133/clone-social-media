@@ -16,13 +16,17 @@ const POSTS_QUERY = gql`
         createdAt
         id
       }
+      likes {
+        username
+        createdAt
+      }
     }
   }
 `;
 
 const PostList = () => {
   const { loading, error, data } = useQuery(POSTS_QUERY);
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p id="error">Loading...</p>;
   if (error) return <p>Error </p>;
   return (
     <div className="PostList">
@@ -35,6 +39,7 @@ const PostList = () => {
             username={post.username}
             createdAt={post.createdAt}
             comments={post.comments}
+            likes={post.likes}
           />
         </div>
       ))}
