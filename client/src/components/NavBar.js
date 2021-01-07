@@ -9,14 +9,19 @@ const NavBar = () => {
     <div className="Navbar">
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link className="navLink" to="/">
+            Home
+          </Link>
         </li>
         <li>
-          <Link to="/register">Register</Link>
+          <Link className="navLink" to="/register">
+            Register
+          </Link>
         </li>
         <li id="loginForm">
           <Login />
         </li>
+        <li></li>
         <li>{username}</li>
       </ul>
     </div>

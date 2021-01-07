@@ -37,7 +37,7 @@ const Post = (props) => {
       return false;
     },
     onError(error1) {
-      console.log(error1.message);
+      window.alert(error1.message);
     },
   });
   return (

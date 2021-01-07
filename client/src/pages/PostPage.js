@@ -31,7 +31,7 @@ const PostPage = () => {
     variables: { postId },
   });
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error </p>;
+  if (error) return <p>{error.message} </p>;
   return (
     <div>
       <p>{data.getPost.createdAt}</p>

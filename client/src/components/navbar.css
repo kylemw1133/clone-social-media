@@ -8,8 +8,16 @@
   list-style-type: none;
   padding-right: 50px;
 }
-a {
+.navLink:link {
   text-decoration: none;
+  color: black;
+}
+.navLink:visited {
+  text-decoration: none;
+  color: black;
+}
+.navLink:hover {
+  background-color: bisque;
 }
 .Navbar ul {
   padding-top: 15px;
