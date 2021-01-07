@@ -14,12 +14,19 @@ const DELETE_POST_MUTATION = gql`
     deletePost(postId: $postId)
   }
 `;
+
+const CREATE_COMMENT_MUTATION = gql`
+  mutation createComment($body: String!, $postId: ID!) {
+    createComment(body: $body, postId: $postId)
+  }
+`;
 // const UNLIKE_MUTATION = gql`
 //   mutation deleteLike($postId: ID!) {
 //     deleteLike(postId: $postId)
 //   }
 // `;
 const Post = (props) => {
+  const [commentBody, setCommentBody] = useState("");
   // const [deleteLike] = useMutation(UNLIKE_MUTATION);
   //delete like mutation in backend required id of like (change to only require postId)
   const [createLike, { loading, error, data }] = useMutation(LIKE_MUTATION, {
@@ -40,6 +47,39 @@ const Post = (props) => {
       window.alert(error1.message);
     },
   });
+  const [createComment, { error2, data2 }] = useMutation(
+    CREATE_COMMENT_MUTATION,
+    {
+      onCompleted() {
+        console.log("created comment");
+      },
+      onError(e) {
+        console.log("error creating comment");
+      },
+    }
+  );
+  let commentText;
+  const handleCommentClick = (e) => {
+    commentText = (
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          createComment({
+            variables: { body: commentBody, postId: props.postId },
+          });
+        }}
+      >
+        <input
+          onChange={(e) => {
+            e.preventDefault();
+            setCommentBody(e.target.value);
+            console.log(commentBody);
+          }}
+          placeholder="enter comment"
+        ></input>
+      </form>
+    );
+  };
   return (
     <div className="Post">
       <h3>{props.username}</h3>
@@ -51,7 +91,9 @@ const Post = (props) => {
       <button onClick={() => createLike({ variables: { postId: props.id } })}>
         Like
       </button>
-      <button>Comment</button>
+      <button onClick={handleCommentClick()}>Comment</button>
+      <div>{commentText}</div>
+      {console.log(commentText)}
       <button onClick={() => deletePost({ variables: { postId: props.id } })}>
         Delete
       </button>
