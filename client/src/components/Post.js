@@ -9,6 +9,11 @@ const LIKE_MUTATION = gql`
     createLike(postId: $postId)
   }
 `;
+const DELETE_POST_MUTATION = gql`
+  mutation deletePost($postId: ID!) {
+    deletePost(postId: $postId)
+  }
+`;
 // const UNLIKE_MUTATION = gql`
 //   mutation deleteLike($postId: ID!) {
 //     deleteLike(postId: $postId)
@@ -26,6 +31,15 @@ const Post = (props) => {
       }
     },
   });
+  const [deletePost, { error1, data1 }] = useMutation(DELETE_POST_MUTATION, {
+    onCompleted() {
+      window.location.reload();
+      return false;
+    },
+    onError(error1) {
+      console.log(error1.message);
+    },
+  });
   return (
     <div className="Post">
       <h3>{props.username}</h3>
@@ -38,6 +52,9 @@ const Post = (props) => {
         Like
       </button>
       <button>Comment</button>
+      <button onClick={() => deletePost({ variables: { postId: props.id } })}>
+        Delete
+      </button>
     </div>
   );
 };
