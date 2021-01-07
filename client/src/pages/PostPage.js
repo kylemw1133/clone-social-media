@@ -17,6 +17,7 @@ const POSTS_QUERY = gql`
         username
       }
       likes {
+        id
         username
         createdAt
       }
@@ -39,6 +40,7 @@ const PostPage = () => {
       <h3>Likes</h3>
       {data.getPost.likes.map((like) => (
         <div>
+          <p>{like.id}</p>
           <p>{like.username}</p>
           <p>{like.createdAt}</p>
         </div>
