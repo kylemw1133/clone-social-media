@@ -17,7 +17,12 @@ const DELETE_POST_MUTATION = gql`
 
 const CREATE_COMMENT_MUTATION = gql`
   mutation createComment($body: String!, $postId: ID!) {
-    createComment(body: $body, postId: $postId)
+    createComment(body: $body, postId: $postId) {
+      id
+      body
+      createdAt
+      username
+    }
   }
 `;
 // const UNLIKE_MUTATION = gql`
@@ -47,39 +52,17 @@ const Post = (props) => {
       window.alert(error1.message);
     },
   });
-  const [createComment, { error2, data2 }] = useMutation(
+  const [createComment, { loading2, error2, data2 }] = useMutation(
     CREATE_COMMENT_MUTATION,
     {
       onCompleted() {
         console.log("created comment");
       },
       onError(e) {
-        console.log("error creating comment");
+        console.log("error");
       },
     }
   );
-  let commentText;
-  const handleCommentClick = (e) => {
-    commentText = (
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          createComment({
-            variables: { body: commentBody, postId: props.postId },
-          });
-        }}
-      >
-        <input
-          onChange={(e) => {
-            e.preventDefault();
-            setCommentBody(e.target.value);
-            console.log(commentBody);
-          }}
-          placeholder="enter comment"
-        ></input>
-      </form>
-    );
-  };
   return (
     <div className="Post">
       <h3>{props.username}</h3>
@@ -91,12 +74,27 @@ const Post = (props) => {
       <button onClick={() => createLike({ variables: { postId: props.id } })}>
         Like
       </button>
-      <button onClick={handleCommentClick()}>Comment</button>
-      <div>{commentText}</div>
-      {console.log(commentText)}
-      <button onClick={() => deletePost({ variables: { postId: props.id } })}>
-        Delete
-      </button>
+      <form
+        onSubmit={(e) => {
+          createComment({
+            variables: {
+              body: commentBody,
+              postId: props.id,
+            },
+          });
+        }}
+      >
+        <input
+          onChange={(e) => {
+            e.preventDefault();
+            setCommentBody(e.target.value);
+            console.log(commentBody);
+          }}
+          placeholder="enter comment"
+        ></input>
+        <button type="submit">Comment</button>
+      </form>
+      <button>Delete</button>
     </div>
   );
 };
