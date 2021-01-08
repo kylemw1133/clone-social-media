@@ -11,7 +11,7 @@ const CREATE_POST = gql`
   }
 `;
 const CreatePost = (props) => {
-  const [createPost, { data }] = useMutation(CREATE_POST);
+  const [createPost] = useMutation(CREATE_POST);
   const [postBody, setPostBody] = useState("");
 
   return (

@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
-import LoginForm from "./components/LoginForm";
 import NavBar from "./components/NavBar";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import RegisterPage from "./pages/RegisterPage";
 import PostPage from "./pages/PostPage";

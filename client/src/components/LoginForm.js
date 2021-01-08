@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { gql, useMutation } from "@apollo/client";
 
 const LoginForm = (props) => {
   const [formState, setFormState] = useState({
@@ -11,7 +10,6 @@ const LoginForm = (props) => {
     <div>
       <form
         onSubmit={(e) => {
-          e.preventDefault();
           props.login({
             variables: {
               username: formState.username,

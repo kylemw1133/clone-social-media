@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CommentList from "./CommentList";
 import moment from "moment";
 import { gql, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
@@ -34,7 +33,7 @@ const Post = (props) => {
   const [commentBody, setCommentBody] = useState("");
   // const [deleteLike] = useMutation(UNLIKE_MUTATION);
   //delete like mutation in backend required id of like (change to only require postId)
-  const [createLike, { loading, error, data }] = useMutation(LIKE_MUTATION, {
+  const [createLike] = useMutation(LIKE_MUTATION, {
     onError(error) {
       console.log(error.message);
       if (error.message === "User already liked the post") {
@@ -43,7 +42,7 @@ const Post = (props) => {
       }
     },
   });
-  const [deletePost, { error1, data1 }] = useMutation(DELETE_POST_MUTATION, {
+  const [deletePost] = useMutation(DELETE_POST_MUTATION, {
     onCompleted() {
       window.location.reload();
       return false;
@@ -52,17 +51,14 @@ const Post = (props) => {
       window.alert(error1.message);
     },
   });
-  const [createComment, { loading2, error2, data2 }] = useMutation(
-    CREATE_COMMENT_MUTATION,
-    {
-      onCompleted() {
-        console.log("created comment");
-      },
-      onError(e) {
-        console.log("error");
-      },
-    }
-  );
+  const [createComment] = useMutation(CREATE_COMMENT_MUTATION, {
+    onCompleted() {
+      console.log("created comment");
+    },
+    onError(e) {
+      console.log("error");
+    },
+  });
   return (
     <div className="Post">
       <h3>{props.username}</h3>
@@ -94,7 +90,13 @@ const Post = (props) => {
         ></input>
         <button type="submit">Comment</button>
       </form>
-      <button>Delete</button>
+      <button
+        onClick={() => {
+          deletePost({ variables: { postId: props.id } });
+        }}
+      >
+        Delete
+      </button>
     </div>
   );
 };

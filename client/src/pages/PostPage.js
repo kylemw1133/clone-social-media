@@ -36,10 +36,10 @@ const PostPage = () => {
     <div>
       <p>{data.getPost.createdAt}</p>
       <p>{data.getPost.body}</p>
-      <CommentList comments={data.getPost.comments} />
+      <CommentList postid={data.getPost.id} comments={data.getPost.comments} />
       <h3>Likes</h3>
       {data.getPost.likes.map((like) => (
-        <div>
+        <div key={like.id}>
           <p>{like.id}</p>
           <p>{like.username}</p>
           <p>{like.createdAt}</p>
