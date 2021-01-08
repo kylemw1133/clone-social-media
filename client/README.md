@@ -5,13 +5,15 @@
 - React.js
 - Apollo Client
 - React Router
-- Semantic UI?
+- Semantic UI? (Can prettify later...)
 
 ## TODO
 
 #### Pages
 
-- Implement React Router w/ User, Signup, and Home pages
+#### Navbar
+
+- Display login form only on no/expired auth token
 
 #### Styling
 
@@ -25,8 +27,3 @@
 #### Posts
 
 - Update the displayed posts after submitting (without refreshing page) ~store posts in state and update state?
-- Delete post
-
-#### Sign Up
-
-- Create Signup page with signup form

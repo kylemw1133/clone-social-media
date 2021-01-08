@@ -1,3 +1,9 @@
 # Social Media Clone based on various social media platforms
 
-### Project created for educational purposes using MERNG stack
+#### Project created for educational purposes using MERNG stack
+
+- MongoDB
+- Express
+- React
+- Node
+- GraphQL
